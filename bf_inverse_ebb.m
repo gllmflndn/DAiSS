@@ -21,8 +21,8 @@ if nargin == 0
     corr.name       = 'Correlated & homologous sources';
     corr.help       = {['Prior matrix is modified so to account for power in a location '...
         'and its correlated partner, allowing for correlated sources normally suppressed '...
-        'by beamformers to be reconstructed. Correlated pairs can be definied in a matrix'...
-        '(see below) or automatically guessed by looking for the mirror along the saggital plane.']};
+        'by beamformers to be reconstructed. Correlated pairs can be defined in a matrix'...
+        '(see below) or automatically guessed by looking for the mirror along the sagittal plane.']};
     corr.labels     = {'yes','no'};
     corr.values     = {true, false};
     corr.val        = {false};
@@ -51,7 +51,7 @@ if nargin == 0
     mixmethod.name   = 'Prior combination method';
     mixmethod.help   = {['How should we combine the correlated and uncorrelated '...
         'priors (assuming we have both) +SUM: simple addition of the two '...
-        'priors to make one matrix. +REML: Two seperate priors, where the ReML'...
+        'priors to make one matrix. +REML: Two separate priors, where the ReML'...
         'optimisation will scale them automatically. (Default: sum)']};
     mixmethod.labels = {'sum','reml'};
     mixmethod.values = {'sum','reml'};
@@ -70,7 +70,7 @@ if nargin == 0
     iid             = cfg_menu;
     iid.tag         = 'iid';
     iid.name        = 'Identity source covariance';
-    iid.help        = {['Assumes sources are indepedent and identically distributed, equivalent to a Bayesian '...
+    iid.help        = {['Assumes sources are independent and identically distributed, equivalent to a Bayesian '...
         'minimum norm estimation. This option bypasses correlated source mode']};
     iid.labels      = {'yes','no'};
     iid.values      = {true, false};
@@ -135,7 +135,7 @@ if S.onlycorr
     S.corr = true;
 end
 
-% Inital setup
+% Initial setup
 %----------------------------------------------------------------
 
 C       = BF.features.(S.modality).C;
@@ -160,7 +160,7 @@ end
 % Check to see if tdcov has been used, warn model evidence scores may not
 % behave as expected
 ntrials = size(BF.data.D,3);
-if Nn > ntrials*16 % maxmium possible samples using tdcov
+if Nn > ntrials*16 % maximum possible samples using tdcov
     warning(['covariance matrix not generated using tdcov - '...
         'model evidence values may not scale as expected!'])
     Nn = 1;
@@ -269,7 +269,7 @@ else
                 'file is the one you want me to use, please only have one in there!']);
             eval(['pairs = X.' flds{1} ';']);
             % Check it has the correct size
-            assert(length(pairs)==nvert,'size of pairs mat doesnt correspond to number of sources');
+            assert(length(pairs)==nvert,'size of pairs mat doesn''t correspond to number of sources');
             %             % need to check if its symmetric - and make this fail if so.
             %             % (except for the condition of an indetity matrix)
             %             tmp = pairs - pairs';
@@ -295,9 +295,9 @@ else
             if ~isnan(L{i})
                 
                 if isempty(S.pairs)
-                    % We are looking for sources in the mirror of the saggital
+                    % We are looking for sources in the mirror of the sagittal
                     % plane, which means flipping the position in the x-axis and
-                    % looking for the source which is the closest (Which isnt
+                    % looking for the source which is the closest (Which isn't
                     % itself!)
                     target  = [-pos(i,1) pos(i,2) pos(i,3)];
                     del     = bsxfun(@minus,pos,target);
@@ -307,8 +307,8 @@ else
                 else
                     % If using the pairs matrix, there are three possible
                     % outcomes:
-                    % 1) Nothing to be found to corellate to
-                    % 2) It finds itself (useful if we need a contolled mix
+                    % 1) Nothing to be found to correlate to
+                    % 2) It finds itself (useful if we need a controlled mix
                     % of correlated and uncorrelated sources).
                     % 3) Finds other source(s) to correlate with.
                     id = find(pairs(i,:));
@@ -336,7 +336,7 @@ else
                     
                     % allocate to corresponding locations in array
                     % count how many times a point comes up (should be twice but
-                    % could be less/more depeding on asymmetry in source space).
+                    % could be less/more depending on asymmetry in source space).
                     if ondiag
                         pow_dual(i,i) = pow_dual(i,i) + pow2_tmp;
                         count(i,i) = count(i,i) + 1;
@@ -364,7 +364,7 @@ else
         end
         
         % correct power for the fact that a) having two sets of lead fields
-        % doubles the power and b) some locations may have been visted more
+        % doubles the power and b) some locations may have been visited more
         % than once,stops this skewing the covariance too much in the
         % correlated sources favour.
         idx = find(count);
@@ -421,8 +421,8 @@ Qe{1}   = UU./trace(UU);
 hP(1) = -5;		% assumes IID noise is 1/100th of signal.
 hC(1) = 1e-64;
 
-% Step 2: optional room noise: WARNING this hasnt been tested for
-% compatibilty with multiple source priors yet!
+% Step 2: optional room noise: WARNING this hasn't been tested for
+% compatibility with multiple source priors yet!
 if ~isempty(S.noise)
     
     if iscell(S.noise)
@@ -456,7 +456,7 @@ end
 
 % ReML to optimise the weighted combination of covariances to
 % best match the original sensor covariance. Comes in two flavours,
-% STRICT: where hyperpriors and precisions have been predfined earlier
+% STRICT: where hyperpriors and precisions have been predefined earlier
 % LOOSE: hyperpriors have free reign, similar to SPM's inversions
 %------------------------------------------------------------------
 switch lower(S.reml)
@@ -466,7 +466,7 @@ switch lower(S.reml)
     case 'loose'
         fprintf('Using ReML: Loose hyperprior settings\n');
         % Need to add a final extra term here to allow ReML to not run into
-        % trouble, a fixed (co)variance componenent which is ~1/100 the
+        % trouble, a fixed (co)variance component which is ~1/100 the
         % magnitude of the sensor covariance.
         Q0          = exp(-5)*trace(C)*Qe{1};
         [Cy,h,~,F,Fa,Fc]= bf_reml_sc(C,[],[Qe LQpL],Nn,-4,16,Q0);

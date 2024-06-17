@@ -567,7 +567,7 @@ B1=squeeze(mean(mean(Beta(:,:,:,1,:),2),1));
 B2=squeeze(mean(mean(Beta(:,:,:,2,:),2),1));
 B3=squeeze(mean(mean(Beta(:,:,:,3,:),2),1));
 
-% seond level stats
+% second level stats
 for i=1:nvert
     
     V=[];
@@ -639,4 +639,4 @@ cnt=cnt+1;
 % end
 
 
-res = image;
+res = image;

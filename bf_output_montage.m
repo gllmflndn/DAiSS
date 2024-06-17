@@ -91,7 +91,7 @@ for m  = 1:numel(modalities)
         if isfield(BF.sources, 'voi')
             montage.labelnew = BF.sources.voi.label;
         elseif isfield(S, 'vois')
-            % collect labels from voi and maks definitions
+            % collect labels from voi and mask definitions
             for v = 1:numel(S.vois)
                 if isfield(S.vois{v}, 'voidef')
                     montage.labelnew{v} = S.vois{v}.voidef.label;

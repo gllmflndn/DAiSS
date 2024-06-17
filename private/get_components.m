@@ -4,9 +4,9 @@ function [comps,comp_sizes] = get_components(adj)
 %   [comps,comp_sizes] = get_components(adj);
 %
 %   Returns the components of an undirected graph specified by the binary and 
-%   undirected adjacency matrix adj. Components and their constitutent nodes are 
+%   undirected adjacency matrix adj. Components and their constituent nodes are 
 %   assigned the same index and stored in the vector, comps. The vector, comp_sizes,
-%   contains the number of nodes beloning to each component.
+%   contains the number of nodes belonging to each component.
 %
 %   Inputs:         adj,    binary and undirected adjacency matrix
 %
