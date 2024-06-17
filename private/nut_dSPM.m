@@ -1,7 +1,7 @@
 function [weight]=nut_dSPM(Lp,data, flags) %---------------------------------------------------------
 % [weight,eta]=nut_dSPM(Lp,data,flags)
 % Lp : lead field
-% inputs for regularization contant:
+% inputs for regularization constant:
 % [1] data.Ryy = sample covariance, for data-dependent regularization
 % [2] flags.gamma = user defined regularization constant, or 'auto' for
 %     leadfield-based regularization

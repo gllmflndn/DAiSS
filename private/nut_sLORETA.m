@@ -1,6 +1,6 @@
 function [weight]=nut_sLORETA(Lp,data,flags)
 % weight=nut_sLORETA(Lp,data,flags)
-% inputs for regularization contant:
+% inputs for regularization constant:
 % [1] data.Ryy = sample covariance, for data-dependent regularization
 % [2] flags.gamma = user defined regularization constant, or 'auto' for
 %     leadfield-based regularization
